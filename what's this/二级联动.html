@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="aa">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+</head>
+<body>
+<div ng-controller="mainCtrl">
+    一级
+    <select ng-change="changeSelect(hh)" ng-model="hh">
+        <option value="{{$index}}" ng-repeat="li in list track by $index">{{li.name}}</option>
+    </select>
+    <select>
+        <option value="" ng-repeat="gao in list2">{{gao.name}}</option>
+
+    </select>
+
+</div>
+<script src="../js8/vendor/angular/angular.js"></script>
+<script src="../js8/vendor/angular-ui-router/angular-ui-router.js"></script>
+<script>
+    var a = angular.module('aa',['ui.router']);
+    angular.module('aa').controller('mainCtrl', function($scope) {
+        $scope.list = [{name: 1, two: [{name: "我是第一个"},{name:"aaaa"}]},
+            {name: 2, two: [{name: "我是第二个"}]}, {name: 3, two: [{name: "我是第三个"}]}];
+        $scope.gao = 1;
+
+        $scope.changeSelect = function (index) {
+            console.log(index);
+            $scope.list2 = $scope.list[index].two;
+            console.log($scope.list2);
+        };
+        var a=13>>2;
+//        alert(a);
+        console.log(a);
+        var b=[2,26,6,62,8,4,9,54,7];
+        var arr=[{age:56},{age:9},{age:23}];
+        arr.sort(function(a,b){
+            return a.age- b.age;
+        });
+        console.log(arr);
+
+
+    });
+
+</script>
+</body>
+</html>

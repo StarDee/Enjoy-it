@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>消除数组重复元素并排序demo</title>
+</head>
+<body>
+	<script type="text/javascript" charset="utf-8" async defer>
+		var a =[1,4,4,5,2,3,4,8,90,54,23,5,2];
+		var b =new Array;
+		(function removeArrs(){
+			for(var i =0;i<a.length;i++){
+					if(b.indexOf(a[i])<0){
+						b.push(a[i])
+					}
+				 }
+				 return b
+			}());
+		alert(b);
+		function compare(c,d){
+			return d-c;
+		}
+		b.sort(compare);
+		alert(b);
+	</script>
+</body>
+</html>

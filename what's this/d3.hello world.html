@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>d3hello world</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css" media="screen">
+	.axis path,
+	.axis line{
+		fill:none;
+		stroke:blue;
+		shape-rendering: crispEdges;
+	}
+	.axis text {
+		font-family: sans-serif;
+		font-size: 11px;
+	}
+</style>
+</head>
+<body>
+	<p>Apple</p>
+    <p>Pear</p>
+    <p id="aa">Banana</p>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+		// var str ='china';
+		(function(d3){
+		var body =d3.select('body');
+		var p =body.selectAll('p');
+		// p.datum(str);
+		// p.text(function(d,i){
+		// 	return "第"+i+"个元素绑定的数据是"+d;
+		// });
+		// var dataset = ["I like dogs","I like cats","I like snakes"];
+		// p.data(dataset)
+		//  .text(function(d,i){
+		// 	return d;
+		// });
+
+		// body.insert("div","#aa")
+		// 	.text('some text');
+		var width =400;
+		var height =300;
+		var rectHeight=25;//每个矩形占像素高度
+		var svg =body.append('svg')
+				.attr("width", width)
+				.attr("height", height); 
+		var dataset=[2.50,2.10,1.70,1.30,0.90];
+	
+		var max=d3.max(dataset);
+		var linear=d3.scale.linear()
+						.domain([0,max])
+						.range([0,300]);
+		svg.selectAll('rect')//选择svg内所有矩形
+			.data(dataset)	//绑定数组
+			.enter()		//指定选择集的enter部分？？
+			.append('rect') //添加足够数量的矩形元素
+			.attr('x',20)
+			.attr('y',function(d,i){
+				return i*rectHeight;
+			})
+			.attr('width',function(d,i){
+				return linear(d);
+			})
+			.attr('height',rectHeight-2)
+			.attr('fill',fallColor);	//给矩形设置颜色
+		function randomColor(){
+			[].forEach.call(document.all,function(a){
+			a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16);
+			})
+		}
+
+		function fallColor(){
+
+			return '#'+(~~(Math.random()*(1<<24))).toString(16);
+		}
+		function fallColor2(){
+			svg.selectAll('rect')
+				.transition()
+				.duration(2000)
+				// .delay(2000)
+				.attr('fill',fallColor);
+			// return '#'+(~~(Math.random()*(1<<24))).toString(16);
+		}
+		setInterval(fallColor2,4000);
+		var axis =d3.svg.axis()
+					.scale(linear)
+					.orient('bottom')
+					.ticks(7);
+
+		svg.append('g')
+			.attr('class','axis')
+			.attr('transform','translate(20,130)')
+			.call(axis);
+		var svg2=body.append('svg')
+				.attr('id', 'svg2')
+				.attr('width',800)
+				.attr('height', 600);
+		var circle =svg2.append('circle')
+				.attr('r', 20)
+				.attr('cx', 20)
+				.attr('cy', 20);
+		setInterval(function(){
+		circle.transition('relative')
+				.attr('cx', 780)
+				.duration(1000)
+				// .ease('elastic(a, p)')
+
+				.transition('relative')
+				.attr('cx',580)
+				.attr('cy',270)
+				.ease('bounce')
+
+				.transition('relative')
+				.attr('cy', 580)
+				.attr('cx',780)
+				.ease('bounce')
+
+				.transition('relative')
+				.attr('cx',20)
+				.ease('poly(100)')
+
+				.transition('relative')
+				.attr('cy',20)
+				.ease('back(1000)');
+		},5200);
+	})(d3);
+    </script>
+</body>
+</html>

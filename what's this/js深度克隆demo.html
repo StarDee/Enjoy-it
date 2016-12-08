@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>demo</title>
+<body>
+<script>
+    function clone(obj) {
+        var objCope;
+        if (obj instanceof Array) {
+            objCope = [];
+            for (var i = 0; i < obj.length; i++) {
+                objCope[i] = clone(obj[i])
+            }
+            return objCope;
+        }
+        if (obj instanceof Object) {
+            objCope = {};
+            for (var k in obj) {
+                objCope[k] = clone(obj[k]);
+            }
+            return objCope;
+        }
+        else {
+            return obj;
+        }
+    }
+    var a = [1, 1, [2, 2], 5];
+    var b = clone(a);
+    console.log(b);
+</script>
+</body>
+</html>
