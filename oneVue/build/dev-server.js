@@ -17,6 +17,19 @@ var port = process.env.PORT || config.dev.port
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var appData = require('../data.json')
+// 引入数据库
+var books = appData.books
+var apiRoutes = express.Router()
+// 使用api的方法来创建连接时候的请求
+apiRoutes.get('/books', function (req, res) {
+  res.json({
+    errno: 0 ,
+    data: books
+  });
+})
+// 调用api
+app.use('/api', apiRoutes)
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

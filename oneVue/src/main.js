@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 import Home from './pages/Home'
 import Detail from './pages/Detail'
 // 定义路由器

@@ -28,7 +28,8 @@
 		text-align: center;
 		padding: 0 .4rem;
 		line-height: .86rem;
-		font-size: 15px;
+		font-size: 16px;
+    color: #fff;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
